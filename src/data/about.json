@@ -1,0 +1,13 @@
+{
+  "data": {
+    "about": [
+      "Born 1992 in Gothenburg, Sweden. Computers have always been part of my life, and it all started with the legendary Amiga.",
+      "My passion for video games got me into programming in high school. I studied programming and game development, and I was introduced to languages such as Java and C++.",
+      "After high school I decided to study for a Bachelor's degree in Computer Science at Blekinge Institute of Technology in Karlskrona, Sweden. I was taught all the fundamentals of software development; software architecture and design, agile software development, advanced programming, software testing, and more. In the final year, I worked with six other students to develop a large scale game from the ground up. My role was to lead the development of the computer graphics engine.",
+      "I later moved to Uppsala for a Master's degree in Computer Science from Uppsala University. I was taught a wide range of Computer Science subjects such as Machine Learning, Artificial Intelligence and Parallel Programming. The second year, I got the opportunity to study abroad for one semester which I did not hesitate to take. I chose South Korea, to study Computer Science at Seoul National University, and this was an incredible experience.",
+      "After my semester in South Korea, I was writing my Master's thesis at King, the makers of Candy Crush. Finishing the thesis was a lot of hard work, but it turned out to be a very rewarding experience.",
+      "I started my professional career as a Systems Developer at Retriever. I was doing front-end work in JavaScript and React, and back-end work in Java.",
+      "I am currently working as a Full-Stack Developer at Kambi in Uppsala. I have been part of a wide variety of projects. I have been doing lots of DevOps work with AWS, front-end work in JavaScript (and TypeScript), back-end work in Java and Kotlin."
+    ]
+  }
+}

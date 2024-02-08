@@ -1,0 +1,31 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem;
+  min-height: 100vh;
+
+  background: linear-gradient(122deg, #004c78, #00694e, #310076, #6c0100);
+  background-size: 600% 600%;
+
+  -webkit-animation: gradientAnim 30s ease infinite;
+  -moz-animation: gradientAnim 30s ease infinite;
+  animation: gradientAnim 30s ease infinite;
+}
+
+@-webkit-keyframes gradientAnim {
+  0%{background-position:0% 26%}
+  50%{background-position:100% 75%}
+  100%{background-position:0% 26%}
+}
+@-moz-keyframes gradientAnim {
+  0%{background-position:0% 26%}
+  50%{background-position:100% 75%}
+  100%{background-position:0% 26%}
+}
+@keyframes gradientAnim {
+  0%{background-position:0% 26%}
+  50%{background-position:100% 75%}
+  100%{background-position:0% 26%}
+}
