@@ -8,15 +8,15 @@ import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
 
 import { Page, Document, pdfjs } from 'react-pdf';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import Slider from "react-slick";
 
 import Particles, { initParticlesEngine } from "@tsparticles/react";
-import type { Container } from "@tsparticles/engine";
+import type { Container, ISourceOptions } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
 
-import particlesData from '../data/particles.json';
+import { particlesData } from '../data/particles';
 import aboutData from '../data/about.json';
 import publicationsData from '../data/publications.json';
 
@@ -28,12 +28,11 @@ import "slick-carousel/slick/slick-theme.css";
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 export default function Home() {
-  const [numPages, setNumPages] = useState(null);
+  const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
 
   const [init, setInit] = useState(false);
-
-  function onDocumentLoadSuccess({ numPages }) {
+  function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);
   }
   
@@ -61,15 +60,18 @@ export default function Home() {
     });
   }, []);
 
-  const particlesLoaded = (container?: Container) => {
+  const particlesLoaded = async (container?: Container): Promise<void> => {
     console.log(container);
   };
+
+  // @ts-ignore
+  const options: ISourceOptions = useMemo(() => particlesData, []);
 
   return (
     <main className={styles.main}>
       { init && <Particles
         id="tsparticles"
-        options={particlesData}
+        options={options}
         particlesLoaded={particlesLoaded}
       />}
         <Typography
@@ -124,29 +126,29 @@ export default function Home() {
           </Typography>
         </Box>
         <Slider {...settings}>
-        {publicationsData.data.publications.map((pub, i) => (
-          <div key={i}>
-            <Typography variant="h6" align="center">
-              {pub.title}
-            </Typography>
-            <div style={{ textAlign: 'center' }}>
-              <Typography variant="caption" style={{ marginTop: 2 }}>
-                {pub.date}
+          {publicationsData.data.publications.map((pub, i) => (
+            <div key={i}>
+              <Typography variant="h6" align="center">
+                {pub.title}
               </Typography>
+              <div style={{ textAlign: 'center' }}>
+                <Typography variant="caption" style={{ marginTop: 2 }}>
+                  {pub.date}
+                </Typography>
+              </div>
+              <Typography variant="subtitle1" align="center" style={{ marginTop: 5 }}>
+                {pub.publisher}
+              </Typography>
+              <Typography variant="subtitle1" align="center" style={{ marginTop: 2 }}>
+                {pub.type}
+              </Typography>
+              {pub.desc.map((desc) => (
+                <Typography key={desc} variant="body1" style={{ marginTop: 10 }}>
+                  {desc}
+                </Typography>
+              ))}
             </div>
-            <Typography variant="subtitle1" align="center" style={{ marginTop: 5 }}>
-              {pub.publisher}
-            </Typography>
-            <Typography variant="subtitle1" align="center" style={{ marginTop: 2 }}>
-              {pub.type}
-            </Typography>
-            {pub.desc.map((desc) => (
-              <Typography key={desc} variant="body1" style={{ marginTop: 10 }}>
-                {desc}
-              </Typography>
-            ))}
-          </div>
-            ))}
+          ))}
         </Slider>
         
         </Box>
