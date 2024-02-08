@@ -2,44 +2,44 @@ export const particlesData = {
   fpsLimit: 120,
   interactivity: {
     events: {},
-    modes: {}
+    modes: {},
   },
   particles: {
     color: {
-      value: "#ffffff"
+      value: '#ffffff',
     },
     links: {
-      color: "#ffffff",
+      color: '#ffffff',
       distance: 150,
       enable: true,
       opacity: 0.5,
-      width: 1
+      width: 1,
     },
     move: {
-      direction: "none",
+      direction: 'none',
       enable: true,
       outModes: {
-        default: "bounce"
+        default: 'bounce',
       },
       random: false,
       speed: 1.15,
-      straight: false
+      straight: false,
     },
     number: {
       density: {
-        enable: true
+        enable: true,
       },
-      value: 100
+      value: 100,
     },
     opacity: {
-      value: 0.4
+      value: 0.4,
     },
     shape: {
-      type: "circle"
+      type: 'circle',
     },
     size: {
-      value: { min: 1, max: 4 }
-    }
+      value: { min: 1, max: 4 },
+    },
   },
-  detectRetina: true
-}
+  detectRetina: true,
+};
