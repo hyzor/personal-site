@@ -2,15 +2,8 @@
 
 import styles from './page.module.css';
 
-import Box from '@mui/system/Box';
-import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
-import Paper from '@mui/material/Paper';
-
 import { Page, Document, pdfjs } from 'react-pdf';
 import { useState, useEffect, useMemo } from 'react';
-
-import Slider from 'react-slick';
 
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import type { Container, ISourceOptions } from '@tsparticles/engine';
@@ -22,8 +15,16 @@ import publicationsData from '../data/publications.json';
 
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
+
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
@@ -38,19 +39,11 @@ export default function Home() {
 
   const aboutText = aboutData.data.about.map((item, i) => {
     return (
-      <Typography key={i} style={{ marginTop: 10 }} variant='subtitle1'>
+      <p key={i} className='leading-7 [&:not(:first-child)]:mt-4'>
         {item}
-      </Typography>
+      </p>
     );
   });
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -76,79 +69,71 @@ export default function Home() {
           particlesLoaded={particlesLoaded}
         />
       )}
-      <Typography variant='h1'>Jesper Falkenby</Typography>
-      <Typography variant='h4' gutterBottom marginBottom={6}>
+      <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-2'>
+        Jesper Falkenby
+      </h1>
+      <h2 className='scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0 mb-16'>
         Full-Stack Developer
-      </Typography>
-      <Box display='flex' justifyContent='center' marginBottom={24}>
-        <Avatar
-          alt='Lion'
-          src='/profile.jpg'
-          sx={{ width: 200, height: 200 }}
-        />
-      </Box>
-      <Box display='flex' justifyContent='center'>
-        <Typography variant='h2' gutterBottom>
-          Résumé
-        </Typography>
-      </Box>
-      <Box display='flex' justifyContent='center' marginBottom={24}>
+      </h2>
+      <div className='flex justify-center mb-48'>
+        <Avatar className='w-64 h-64'>
+          <AvatarImage alt='Jesper Falkenby' src='/profile.jpg' />
+          <AvatarFallback>JF</AvatarFallback>
+        </Avatar>
+      </div>
+      <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-8'>
+        Résumé
+      </h1>
+      <div className='flex justify-center mb-48'>
         <Document file='/resume.pdf' onLoadSuccess={onDocumentLoadSuccess}>
-          <Page pageNumber={pageNumber} scale={1.22} />
+          <Page pageNumber={pageNumber} scale={1.25} />
         </Document>
-      </Box>
-      <Box maxWidth={1024} marginBottom={24}>
-        <Box display='flex' justifyContent='center'>
-          <Typography variant='h2' gutterBottom>
+      </div>
+      <div className='max-w-4xl mb-48'>
+        <div className='flex justify-center'>
+          <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-8'>
             About me
-          </Typography>
-        </Box>
+          </h1>
+        </div>
         {aboutText}
-      </Box>
-      <Box maxWidth={1024} marginBottom={16}>
-        <Box display='flex' justifyContent='center'>
-          <Typography variant='h2' gutterBottom>
+      </div>
+      <div className='max-w-4xl mb-48'>
+        <div className='flex justify-center'>
+          <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-8'>
             Publications
-          </Typography>
-        </Box>
-        <Slider {...settings}>
-          {publicationsData.data.publications.map((pub, i) => (
-            <div key={i}>
-              <Typography variant='h6' align='center'>
-                {pub.title}
-              </Typography>
-              <div style={{ textAlign: 'center' }}>
-                <Typography variant='caption' style={{ marginTop: 2 }}>
-                  {pub.date}
-                </Typography>
-              </div>
-              <Typography
-                variant='subtitle1'
-                align='center'
-                style={{ marginTop: 5 }}
-              >
-                {pub.publisher}
-              </Typography>
-              <Typography
-                variant='subtitle1'
-                align='center'
-                style={{ marginTop: 2 }}
-              >
-                {pub.type}
-              </Typography>
-              {pub.desc.map((desc) => (
-                <Typography
-                  key={desc}
-                  variant='body1'
-                  style={{ marginTop: 10 }}
-                >
-                  {desc}
-                </Typography>
-              ))}
-            </div>
-          ))}
-        </Slider>
-      </Box>
+          </h1>
+        </div>
+        <Carousel>
+          <CarouselContent>
+            {publicationsData.data.publications.map((pub, i) => (
+              <CarouselItem key={i}>
+                <div className='text-center'>
+                  <h4 className='scroll-m-20 text-xl font-semibold tracking-tight'>
+                    {pub.title}
+                  </h4>
+                  <div style={{ textAlign: 'center' }}>
+                    <small className='text-sm font-medium leading-none'>
+                      {pub.date}
+                    </small>
+                  </div>
+                  <div className='text-lg font-semibold'>{pub.publisher}</div>
+                  <div className='text-lg font-semibold'>{pub.type}</div>
+                </div>
+                {pub.desc.map((desc) => (
+                  <p
+                    key={desc}
+                    className='leading-7 [&:not(:first-child)]:mt-4'
+                  >
+                    {desc}
+                  </p>
+                ))}
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </div>
     </main>
   );
 }

@@ -1,8 +1,15 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
-import { ThemeProvider } from '@mui/material/styles';
-import theme from './theme';
+
+import { ThemeProvider } from '@/components/theme-provider';
+
+import { Inter as FontSans } from 'next/font/google';
+import { cn } from '@/lib/utils';
+
+const fontSans = FontSans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+});
 
 export const metadata: Metadata = {
   title: 'Jesper Falkenby',
@@ -16,10 +23,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body>
-        <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
-        </AppRouterCacheProvider>
+      <body
+        className={cn(
+          'min-h-screen bg-background font-sans antialiased',
+          fontSans.variable
+        )}
+      >
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -6,44 +6,5 @@
   padding: 6rem;
   min-height: 100vh;
 
-  background: linear-gradient(122deg, #004c78, #00694e, #310076, #6c0100);
-  background-size: 600% 600%;
-
-  -webkit-animation: gradientAnim 30s ease infinite;
-  -moz-animation: gradientAnim 30s ease infinite;
-  animation: gradientAnim 30s ease infinite;
-}
-
-@-webkit-keyframes gradientAnim {
-  0% {
-    background-position: 0% 26%;
-  }
-  50% {
-    background-position: 100% 75%;
-  }
-  100% {
-    background-position: 0% 26%;
-  }
-}
-@-moz-keyframes gradientAnim {
-  0% {
-    background-position: 0% 26%;
-  }
-  50% {
-    background-position: 100% 75%;
-  }
-  100% {
-    background-position: 0% 26%;
-  }
-}
-@keyframes gradientAnim {
-  0% {
-    background-position: 0% 26%;
-  }
-  50% {
-    background-position: 100% 75%;
-  }
-  100% {
-    background-position: 0% 26%;
-  }
+  background-image: radial-gradient(circle at center center, rgba(33,33,33,0),rgb(33,33,33)),repeating-linear-gradient(135deg, rgb(33,33,33) 0px, rgb(33,33,33) 1px,transparent 1px, transparent 4px),repeating-linear-gradient(45deg, rgb(52,55,94) 0px, rgb(52,55,94) 5px,transparent 5px, transparent 6px),linear-gradient(90deg, rgb(33,33,33),rgb(33,33,33));  
 }
