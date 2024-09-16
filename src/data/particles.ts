@@ -10,7 +10,7 @@ export const particlesData = {
     },
     links: {
       color: '#ffffff',
-      distance: 250,
+      distance: 220,
       enable: true,
       opacity: 0.3,
       width: 1,
@@ -29,7 +29,7 @@ export const particlesData = {
       density: {
         enable: true,
       },
-      value: 60,
+      value: 50,
     },
     opacity: {
       value: 0.4,

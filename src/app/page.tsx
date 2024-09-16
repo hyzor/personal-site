@@ -5,6 +5,8 @@ import styles from './page.module.css';
 import { Page, Document, pdfjs } from 'react-pdf';
 import { useState, useEffect, useMemo } from 'react';
 
+import { LinkedInLogoIcon, GitHubLogoIcon } from '@radix-ui/react-icons';
+
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import type { Container, ISourceOptions } from '@tsparticles/engine';
 import { loadSlim } from '@tsparticles/slim';
@@ -25,6 +27,7 @@ import {
 } from '@/components/ui/carousel';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
@@ -33,13 +36,17 @@ export default function Home() {
   const [pageNumber, setPageNumber] = useState(1);
 
   const [init, setInit] = useState(false);
+
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);
   }
 
   const aboutText = aboutData.data.about.map((item, i) => {
     return (
-      <p key={i} className='leading-7 [&:not(:first-child)]:mt-4'>
+      <p
+        key={i}
+        className='leading-7 [&:not(:first-child)]:mt-4 text-slate-200'
+      >
         {item}
       </p>
     );
@@ -69,10 +76,10 @@ export default function Home() {
           particlesLoaded={particlesLoaded}
         />
       )}
-      <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-2'>
+      <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-2 text-slate-200'>
         Jesper Falkenby
       </h1>
-      <h2 className='scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0 mb-16'>
+      <h2 className='scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0 mb-16 text-slate-200'>
         Full-Stack Developer
       </h2>
       <div className='flex justify-center mb-48'>
@@ -81,7 +88,7 @@ export default function Home() {
           <AvatarFallback>JF</AvatarFallback>
         </Avatar>
       </div>
-      <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-8'>
+      <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-8 text-slate-200'>
         Résumé
       </h1>
       <div className='flex justify-center mb-48'>
@@ -91,7 +98,7 @@ export default function Home() {
       </div>
       <div className='max-w-4xl mb-48'>
         <div className='flex justify-center'>
-          <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-8'>
+          <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-8 text-slate-200'>
             About me
           </h1>
         </div>
@@ -99,7 +106,7 @@ export default function Home() {
       </div>
       <div className='max-w-4xl mb-48'>
         <div className='flex justify-center'>
-          <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-8'>
+          <h1 className='scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-8 text-slate-200'>
             Publications
           </h1>
         </div>
@@ -108,21 +115,25 @@ export default function Home() {
             {publicationsData.data.publications.map((pub, i) => (
               <CarouselItem key={i}>
                 <div className='text-center'>
-                  <h4 className='scroll-m-20 text-xl font-semibold tracking-tight'>
+                  <h4 className='scroll-m-20 text-xl font-semibold tracking-tight text-slate-200'>
                     {pub.title}
                   </h4>
                   <div style={{ textAlign: 'center' }}>
-                    <small className='text-sm font-medium leading-none'>
+                    <small className='text-sm font-medium leading-none text-slate-200'>
                       {pub.date}
                     </small>
                   </div>
-                  <div className='text-lg font-semibold'>{pub.publisher}</div>
-                  <div className='text-lg font-semibold'>{pub.type}</div>
+                  <div className='text-lg font-semibold text-slate-200'>
+                    {pub.publisher}
+                  </div>
+                  <div className='text-lg font-semibold text-slate-200'>
+                    {pub.type}
+                  </div>
                 </div>
                 {pub.desc.map((desc) => (
                   <p
                     key={desc}
-                    className='leading-7 [&:not(:first-child)]:mt-4'
+                    className='leading-7 [&:not(:first-child)]:mt-4 text-slate-200'
                   >
                     {desc}
                   </p>
@@ -133,6 +144,22 @@ export default function Home() {
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
+      </div>
+      <div className='flex justify-center'>
+        <a
+          href='https://www.linkedin.com/in/jesperfalkenby/'
+          target='_blank'
+          className='mr-2'
+        >
+          <Button variant='default' size='icon'>
+            <LinkedInLogoIcon className='h-6 w-6' />
+          </Button>
+        </a>
+        <a href='https://github.com/hyzor' target='_blank'>
+          <Button variant='default' size='icon'>
+            <GitHubLogoIcon className='h-6 w-6' />
+          </Button>
+        </a>
       </div>
     </main>
   );
