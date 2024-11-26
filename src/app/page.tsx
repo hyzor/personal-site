@@ -93,7 +93,7 @@ export default function Home() {
       </h1>
       <div className='flex justify-center mb-48'>
         <Document file='/resume.pdf' onLoadSuccess={onDocumentLoadSuccess}>
-          <Page pageNumber={pageNumber} scale={1.25} />
+          <Page pageNumber={pageNumber} scale={1.5} />
         </Document>
       </div>
       <div className='max-w-4xl mb-48'>
